@@ -1,0 +1,26 @@
+import tkinter as tk
+from time import strftime
+def update_time():
+    time_string = strftime('%I:%M:%S %p')
+    day_string = strftime('%A')
+    date_string = strftime('%B %d, %Y')
+    time_label.config(text=time_string)
+    day_label.config(text=day_string)
+    date_label.config(text=date_string)
+    root.after(1000, update_time)
+root = tk.Tk()
+root.title("Centered Full-Screen Digital Clock")
+root.attributes("-fullscreen", True)
+root.configure(bg='black')
+root.bind("<Escape>", lambda event: root.attributes("-fullscreen", False))
+frame = tk.Frame(root, bg='black')
+frame.place(relx=0.5, rely=0.5, anchor='center')  
+time_label = tk.Label(frame, font=('Helvetica', 100), fg='pink', bg='black')
+time_label.pack(pady=20)
+day_label = tk.Label(frame, font=('Helvetica', 40), fg='white', bg='black')
+day_label.pack()
+date_label = tk.Label(frame, font=('Helvetica', 40), fg='white', bg='black')
+date_label.pack()
+update_time()
+root.mainloop()
+
